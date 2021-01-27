@@ -14,7 +14,7 @@ services:
       - ./strapi:/srv/app
       - ./ssh:/root/.ssh
     ports:
-      - '1337:1337'
+      - '1337:1337' #mapping between host port to container port local:container
     depends_on:
       - postgres
 
@@ -29,3 +29,7 @@ services:
       - '5432:5432'
     volumes:
       - ./database:/var/lib/postgresql/data
+
+#eval `ssh-agent -s`
+#ssh-add
+#ssh -L -f 5432:127.0.0.1:5432 strapi@167.71.59.228
