@@ -1,8 +1,9 @@
 version: '3.7'
 services:
+  #this is strapi container
   strapi:
-    image: strapi/strapi
-    container_name: strapi
+    image: strapi/strapi #official strapi image that it will be built with
+    container_name: strapi # it will be named automaticalli if you leave this out need to be unique
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_NAME: ${POSTGRES_DB}
@@ -10,14 +11,14 @@ services:
       DATABASE_PORT: ${DATABASE_PORT}
       DATABASE_USERNAME: ${POSTGRES_USER}
       DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
-    volumes:
+    volumes: #bind mount the current directory from the host in the container into the /app directory
       - ./strapi:/srv/app
       - ./ssh:/root/.ssh
     ports:
       - '1337:1337' #mapping between host port to container port local:container
     depends_on:
       - postgres
-
+#database container
   postgres:
     image: postgres
     container_name: postgres

@@ -128,11 +128,17 @@ module.exports = {
   async upload({ data, files }, { user } = {}) {
     const { fileInfo, ...metas } = data;
 
+
     const fileArray = Array.isArray(files) ? files : [files];
     const fileInfoArray = Array.isArray(fileInfo) ? fileInfo : [fileInfo];
 
+    // console.log("FILES DO UPLOAD SEES : ", fileArray)
+    // console.log("FILEINFO DO UPLOAD SEES : ", fileInfoArray)
+
+
     const doUpload = async (file, fileInfo) => {
       const fileData = await this.enhanceFile(file, fileInfo, metas);
+      // console.log("fileinfo: ", fileInfo)
 
       return this.uploadFileAndPersist(fileData, { user });
     };
@@ -142,61 +148,42 @@ module.exports = {
     );
   },
 
+
   async uploadFileAndPersist(fileData, { user } = {}) {
+
+    let AllFormats=[]
     const config = strapi.plugins.upload.config;
 
     const {
       getDimensions,
-      // generateThumbnail,
-      generateMINI,
-      generateMEDIUM,
-      generateLARGE
-      // generateResponsiveFormats,
+      // generateMINI,
+      // generateMEDIUM,
+      generateALL,
     } = strapi.plugins.upload.services['image-manipulation'];
 
     await strapi.plugins.upload.provider.upload(fileData);
 
-    // const thumbnailFile = await generateThumbnail(fileData);
-    // if (thumbnailFile) {
-    //   await strapi.plugins.upload.provider.upload(thumbnailFile);
-    //   delete thumbnailFile.buffer;
-    //   _.set(fileData, 'formats.thumbnail', thumbnailFile);
-    // }
-//////
-    const miniFile = await generateMINI(fileData);
-    if (miniFile) {
-      await strapi.plugins.upload.provider.upload(miniFile);
-      delete miniFile.buffer;
-      _.set(fileData, 'formats.200x200', miniFile);
+    const allFiles = await generateALL(fileData)
+    console.log("ALL FILES", allFiles)
+
+    if(allFiles.length > 0) {
+      for (let oneFile of allFiles) {
+        await strapi.plugins.upload.provider.upload(oneFile);
+        const { width, height } = await getDimensions(oneFile.buffer);
+        delete oneFile.buffer
+
+        _.assign(oneFile, {
+          provider: config.provider,
+          width,
+          height,
+        });
+        this.add(oneFile, { user });
+      }
     }
 
-    const mediumFile = await generateMEDIUM(fileData);
-    if (mediumFile) {
-      await strapi.plugins.upload.provider.upload(mediumFile);
-      delete mediumFile.buffer;
-      _.set(fileData, 'formats.350x350', mediumFile);
-    }
 
-    const largeFile = await generateLARGE(fileData);
-    if (largeFile) {
-      await strapi.plugins.upload.provider.upload(largeFile);
-      delete largeFile.buffer;
-      _.set(fileData, 'formats.1400x700', largeFile);
-    }
-///////////
-    // const formats = await generateResponsiveFormats(fileData);
-    // if (Array.isArray(formats) && formats.length > 0) {
-    //   for (const format of formats) {
-    //     if (!format) continue;
 
-    //     const { key, file } = format;
 
-    //     await strapi.plugins.upload.provider.upload(file);
-    //     delete file.buffer;
-
-    //     _.set(fileData, ['formats', key], file);
-    //   }
-    // }
 
     const { width, height } = await getDimensions(fileData.buffer);
 
@@ -207,9 +194,12 @@ module.exports = {
       width,
       height,
     });
-
     return this.add(fileData, { user });
   },
+
+
+
+
 
   async updateFileInfo(id, { name, alternativeText, caption }, { user } = {}) {
     const dbFile = await this.fetch({ id });
@@ -232,11 +222,9 @@ module.exports = {
 
     const {
       getDimensions,
-      // generateThumbnail,
       generateMINI,
       generateMEDIUM,
-      generateLARGE
-      // generateResponsiveFormats,
+      generatePortrait
     } = strapi.plugins.upload.services['image-manipulation'];
 
     const dbFile = await this.fetch({ id });
@@ -280,26 +268,26 @@ module.exports = {
     // }
 
 //////
-    const miniFile = await generateMINI(fileData);
-    if (miniFile) {
-      await strapi.plugins.upload.provider.upload(miniFile);
-      delete miniFile.buffer;
-      _.set(fileData, 'formats.200x200', miniFile);
-    }
+    // const miniFile = await generateMINI(fileData);
+    // if (miniFile) {
+    //   await strapi.plugins.upload.provider.upload(miniFile);
+    //   delete miniFile.buffer;
+    //   _.set(fileData, 'formats.200x200', miniFile);
+    // }
 
-    const mediumFile = await generateMEDIUM(fileData);
-    if (mediumFile) {
-      await strapi.plugins.upload.provider.upload(mediumFile);
-      delete mediumFile.buffer;
-      _.set(fileData, 'formats.350x350', mediumFile);
-    }
+    // const mediumFile = await generateMEDIUM(fileData);
+    // if (mediumFile) {
+    //   await strapi.plugins.upload.provider.upload(mediumFile);
+    //   delete mediumFile.buffer;
+    //   _.set(fileData, 'formats.350x350', mediumFile);
+    // }
 
-    const largeFile = await generateLARGE(fileData);
-    if (largeFile) {
-      await strapi.plugins.upload.provider.upload(largeFile);
-      delete largeFile.buffer;
-      _.set(fileData, 'formats.1400x700', largeFile);
-    }
+    // const largeFile = await generateLARGE(fileData);
+    // if (largeFile) {
+    //   await strapi.plugins.upload.provider.upload(largeFile);
+    //   delete largeFile.buffer;
+    //   _.set(fileData, 'formats.1400x700', largeFile);
+    // }
 ////////////
 
     // const formats = await generateResponsiveFormats(fileData);
@@ -342,6 +330,7 @@ module.exports = {
   },
 
   async add(values, { user } = {}) {
+    console.log("values in ADD", values)
     const fileValues = { ...values };
     if (user) {
       fileValues[UPDATED_BY_ATTRIBUTE] = user.id;
