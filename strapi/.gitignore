@@ -117,4 +117,5 @@ public
 .editorconfig
 .eslintignore
 .eslintrc
+jwt.js
 
