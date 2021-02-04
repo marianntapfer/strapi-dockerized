@@ -5,6 +5,7 @@ database
 strapi/*
 !strapi/api
 !strapi/components
+!strapi/entrypoint.sh
 ssh
 
 
