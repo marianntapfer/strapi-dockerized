@@ -122,4 +122,4 @@ exports
 build
 .strapi-updater.json
 config
-.env
+*.env
