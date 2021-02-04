@@ -2,7 +2,7 @@
 node_modules/
 jspm_packages/
 database
-strapi
+strapi/*
 !strapi/api
 !strapi/components
 ssh
