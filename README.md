@@ -22,3 +22,12 @@ https://hub.docker.com/r/strapi/strapi
 docker ps
 docker stop <the-container-id>
 docker rm <the-container-id>
+
+
+step1
+
+stest-step1 harus ja docker-compose up -d
+
+step2
+
+täida .env näidis faili sisu õigete väärtusetga
