@@ -26,8 +26,16 @@ docker rm <the-container-id>
 
 step1
 
-stest-step1 harus ja docker-compose up -d
+stest-step1 harus 
+täida .env näidis faili sisu õigete väärtusetgadockerd
+docker-compose up -d
+kui oled varem juba teinud võib igaksjuhuks :(docker-compose up -d --remove-orphans)
+
+strapi ehitatakse valmis. Näed, et isnu arvutisse tekib strapi nimeline kaust, tühja strapi sisuga
 
 step2
 
+mine stest harusse ja
+
 täida .env näidis faili sisu õigete väärtusetga
+
