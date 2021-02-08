@@ -15,5 +15,5 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - '1337:1337' #mapping between host port to container port local:container
-    command: strapi start  
-    entrypoint: /srv/app/entrypoint.sh
+    command: strapi start
+    # entrypoint: /srv/app/entrypoint.sh //esimene  docker-compose up
