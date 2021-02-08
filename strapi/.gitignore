@@ -112,10 +112,3 @@ exports
 *.cache
 build
 .strapi-updater.json
-public
-/config
-.editorconfig
-.eslintignore
-.eslintrc
-jwt.js
-

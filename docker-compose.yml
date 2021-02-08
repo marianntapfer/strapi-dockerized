@@ -3,7 +3,7 @@ services:
   #this is strapi container
   strapi:
     image: strapi/strapi #official strapi image that it will be built with
-    container_name: strapi # it will be named automaticalli if you leave this out need to be unique
+    container_name: strapi-live-like # it will be named automaticalli if you leave this out need to be unique
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
       DATABASE_NAME: ${POSTGRES_DB}
@@ -21,7 +21,7 @@ services:
 #database container
   postgres:
     image: postgres
-    container_name: postgres
+    container_name: postgres_db
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
