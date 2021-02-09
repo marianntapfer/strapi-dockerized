@@ -3,7 +3,7 @@ services:
   strapi:
     volumes:
       - ./strapi:/srv/app
-      - ~/.ssh:/root/.ssh
+      - ./.ssh:/root/.ssh
     image: strapi/strapi
     container_name: strapi
     environment:
@@ -15,5 +15,5 @@ services:
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
     ports:
       - '1337:1337' #mapping between host port to container port local:container
-    command: strapi start  
+    command: strapi start
     entrypoint: /srv/app/entrypoint.sh

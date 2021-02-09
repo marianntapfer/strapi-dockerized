@@ -32,3 +32,5 @@ docker images
 docker rm
 docker rm -f
 dokcer rmi
+
+docker exec -it <name_of_container> /bin/sh; exit

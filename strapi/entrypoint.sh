@@ -45,7 +45,7 @@ echo "Starting your app..."
 echo "Creating tunnel"
 ls -al ~/
 chown -R root:root /root/.ssh
-nohup ssh -L 5431:127.0.0.1:5432 BNFF -N &
+nohup ssh -v -L 5431:127.0.0.1:5432 BNFF -N &
 echo "Tunnel created"
 
 exec "$@"
