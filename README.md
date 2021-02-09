@@ -22,3 +22,13 @@ https://hub.docker.com/r/strapi/strapi
 docker ps
 docker stop <the-container-id>
 docker rm <the-container-id>
+
+.ssh/config failis  pöffi serveri host ==> BNFF
+
+docker-compose logs -f
+docker ps
+docker ps -a
+docker images
+docker rm
+docker rm -f
+dokcer rmi

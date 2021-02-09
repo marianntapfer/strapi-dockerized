@@ -1,8 +1,9 @@
 {
   "collectionName": "components_article_trio_poff_ets",
   "info": {
-    "name": "TrioPOFF",
-    "icon": "door-open"
+    "name": "Triopoff",
+    "icon": "door-open",
+    "description": ""
   },
   "options": {},
   "attributes": {

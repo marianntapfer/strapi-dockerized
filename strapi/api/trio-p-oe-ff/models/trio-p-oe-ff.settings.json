@@ -2,11 +2,13 @@
   "kind": "singleType",
   "collectionName": "trio_p_oe_ffs",
   "info": {
-    "name": "TrioPÖFF"
+    "name": "TrioPOFF",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "trioPoff_et": {

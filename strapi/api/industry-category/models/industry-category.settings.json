@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "industry_categories",
   "info": {
-    "name": "Industry_Category"
+    "name": "Industry_Category",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "name": {

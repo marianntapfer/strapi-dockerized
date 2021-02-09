@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "industry_events",
   "info": {
-    "name": "Industry_Event"
+    "name": "Industry_Event",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "titlePrivate": {

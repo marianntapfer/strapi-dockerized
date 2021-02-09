@@ -33,9 +33,6 @@
     },
     "web_role": {
       "model": "web-role"
-    },
-    "test": {
-      "type": "string"
     }
   }
 }

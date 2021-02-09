@@ -1,8 +1,9 @@
 {
   "collectionName": "components_article_trio_just_films",
   "info": {
-    "name": "TrioJustFilm",
-    "icon": "dice-three"
+    "name": "Triojustfilm",
+    "icon": "dice-three",
+    "description": ""
   },
   "options": {},
   "attributes": {

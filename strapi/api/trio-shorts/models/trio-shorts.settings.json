@@ -2,11 +2,13 @@
   "kind": "singleType",
   "collectionName": "trio_shorts",
   "info": {
-    "name": "TrioShorts"
+    "name": "TrioShorts",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": true
   },
   "attributes": {
     "trioShorts_et": {
