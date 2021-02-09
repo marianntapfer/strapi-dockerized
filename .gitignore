@@ -117,13 +117,11 @@ coverage
 # Strapi
 ############################
 
-.env
 license.txt
 exports
 *.cache
-*.config
 build
 .strapi-updater.json
-config
 *.env
 .ssh/*
+
