@@ -4,7 +4,7 @@ services:
     volumes:
       - ./strapi:/srv/app
       - ./.ssh:/root/.ssh
-    image: strapi/strapi
+    image: siimsutt/strapitst
     container_name: strapi
     environment:
       DATABASE_CLIENT: ${DATABASE_CLIENT}
